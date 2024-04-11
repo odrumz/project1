@@ -7,67 +7,64 @@ weatherform.addEventListener("submit", async (e) => {
     e.preventDefault();
     const city = weatherdata.value;
     if (city){
-        
-            try{
-                const weatherData = await getweatherData(city);
-                displayweatherinfo(weatherData);
-    
-            }
-            catch(error){
-                displayerror(error.message);
-            }
-        
+        try{
+            const weatherData = await getweatherData(city);
+            displayweatherinfo(weatherData);
+
+        }
+        catch(error){
+            displayerror(error.message);
+        }
     }
     else{
         displayerror("Please try and enter a city name");
     }
 
-})
+});
 async function getweatherData(city){
-    const apiurl = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apikey}`
-    const response = await fetch(apiurl);
-    if(!response.ok){
-        throw new Error("Error:The city does not exist");
-    }
-    return await response.json();
-   
+ const apiurl = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apikey}`
+ const response = await fetch(apiurl);
+ if(!response.ok){
+     throw new Error("Error:The city does not exist");
+ }
+ return await response.json();
 }
 function displayweatherinfo(data){
-    function displayweatherinfo(data){
     
-        const {name: city,
-               main: {temp, humidity},
-               weather: [{description, id}]} = data;
-               weatherbox.textContent = "";
-               weatherbox.style.display = "flex"
+    const {name: city,
+           main: {temp, humidity},
+           weather: [{description, id}]} = data;
+    weatherbox.textContent = "";
+    weatherbox.style.display = "flex" 
+    const citytype = document.createElement("h1");
+    const temperature = document.createElement("p");
+    const humiditytype = document.createElement("p");
+    const display = document.createElement("p");
+    const weatheremoji = document.createElement("p");
 
-               const citytype = document.createElement("h1");
-               const temperature = document.createElement("p");
-               const humiditytype = document.createElement("p");
-               const display = document.createElement("p");
-               const weatheremoji = document.createElement("p");
-           
-               
-           
-           
-               citytype.textContent = city;
-               temperature.textContent = `Temp: ${Math.floor(temp - 273.15)}°C`;
-               humiditytype.textContent = `humidity: ${humidity}%`;
-               display.textContent = description;
-               weatheremoji.textContent = getweatherEmoji(id);
-           
-               citytype.classList.add("citytype");
-               temperature.classList.add("temperature");
-               humiditytype.classList.add("humidity");
-               display.classList.add("display");
-               weatheremoji.classList.add("weatheremoji");
-           
-               weatherbox.appendChild(citytype);
-               weatherbox.appendChild(temperature)
-               weatherbox.appendChild(humiditytype);
-               weatherbox.appendChild(display);
-               weatherbox.appendChild(weatheremoji);
-}}
+    
+
+
+    citytype.textContent = city;
+    temperature.textContent = `Temp: ${Math.floor(temp - 273.15)}°C`;
+    humiditytype.textContent = `humidity: ${humidity}%`;
+    display.textContent = description;
+    weatheremoji.textContent = getweatherEmoji(id);
+
+    citytype.classList.add("citytype");
+    temperature.classList.add("temperature");
+    humiditytype.classList.add("humidity");
+    display.classList.add("display");
+    weatheremoji.classList.add("weatheremoji");
+
+    weatherbox.appendChild(citytype);
+    weatherbox.appendChild(temperature)
+    weatherbox.appendChild(humiditytype);
+    weatherbox.appendChild(display);
+    weatherbox.appendChild(weatheremoji);
+
+    
+}
 function getweatherEmoji(weatherId){
     switch(true){
         case weatherId >= 200 && weatherId < 300:
@@ -87,8 +84,6 @@ function getweatherEmoji(weatherId){
         default:
             return "??";
     }
-
-   
 
 }
 function displayerror(message){
