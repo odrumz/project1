@@ -33,7 +33,16 @@ async function getweatherData(city){
    
 }
 function displayweatherinfo(data){
-}
+    function displayweatherinfo(data){
+    
+        const {name: city,
+               main: {temp, humidity},
+               weather: [{description, id}]} = data;
+               weatherbox.textContent = "";
+               weatherbox.style.display = "flex"
+
+               console.log(data);
+}}
 function getweatherEmoji(weatherId){
    
 
