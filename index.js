@@ -24,7 +24,13 @@ weatherform.addEventListener("submit", async (e) => {
 
 })
 async function getweatherData(city){
- 
+    const apiurl = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apikey}`
+    const response = await fetch(apiurl);
+    if(!response.ok){
+        throw new Error("Error:The city does not exist");
+    }
+    return await response.json();
+   
 }
 function displayweatherinfo(data){
 }
