@@ -41,7 +41,32 @@ function displayweatherinfo(data){
                weatherbox.textContent = "";
                weatherbox.style.display = "flex"
 
-               console.log(data);
+               const citytype = document.createElement("h1");
+               const temperature = document.createElement("p");
+               const humiditytype = document.createElement("p");
+               const display = document.createElement("p");
+               const weatheremoji = document.createElement("p");
+           
+               
+           
+           
+               citytype.textContent = city;
+               temperature.textContent = `Temp: ${Math.floor(temp - 273.15)}°C`;
+               humiditytype.textContent = `humidity: ${humidity}%`;
+               display.textContent = description;
+               weatheremoji.textContent = getweatherEmoji(id);
+           
+               citytype.classList.add("citytype");
+               temperature.classList.add("temperature");
+               humiditytype.classList.add("humidity");
+               display.classList.add("display");
+               weatheremoji.classList.add("weatheremoji");
+           
+               weatherbox.appendChild(citytype);
+               weatherbox.appendChild(temperature)
+               weatherbox.appendChild(humiditytype);
+               weatherbox.appendChild(display);
+               weatherbox.appendChild(weatheremoji);
 }}
 function getweatherEmoji(weatherId){
    
