@@ -8,14 +8,23 @@
    
 </head>
 <body>
+    
     <form class="weatherform">
-
-        <input type="text" class="weatherdata" placeholder="Enter city">
+        <input type="text" class="weatherdata" placeholder="Enter city name">
         <button type="submit">🔍</button>
     </form>
-    <div class="weatherbox" style="display: flex;">
-    </div>
-    
+
+    <div id="comments-container">
+        <ul id="comments-list"></ul>
+        <form id="comment-form">
+          <input id="comment-input" placeholder="Comment about today'weather"></input>
+          <button type="submit" id="publish">Comment</button>
+        </form>
+
+     </div> 
+   
+    <div class="weatherbox" style="display: flex;"></div>
+ 
     <script src="./weather.js"></script>
     
 </body>

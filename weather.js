@@ -4,7 +4,35 @@ const weatherdata = document.querySelector(".weatherdata")
 const weatherbox = document.querySelector(".weatherbox")
 const apikey = "61a740118d162c882bcaaa27e5123b0b"
 
-// The eventlistener will enable the user to search the specific weather when the search button is clicked
+//This function is responsible in taking in the comment of the user feeling about the weather
+document.addEventListener("DOMContentLoaded", function() {
+const commentForm = document.getElementById('comment-form');
+  const commentInput = document.getElementById('comment-input');
+  const commentsList = document.getElementById('comments-list');
+
+  commentForm.addEventListener('submit', function(event) {
+    event.preventDefault(); // Prevent form submission
+    const commentText = commentInput.value.trim();
+
+    if (commentText === '') {
+      alert('Please enter a comment.');
+      return;
+    }
+
+    addComment(commentText);
+    commentInput.value = ''; // Clear input after submitting
+  });
+
+  function addComment(commentText) {
+    const li = document.createElement('li');
+    li.classList.add('comment');
+    const p = document.createElement('p');
+    p.textContent = commentText;
+    li.appendChild(p);
+    commentsList.appendChild(li);
+  }
+});
+
 weatherform.addEventListener("submit", async (e) => {
     
     // this prevents Defaulting the page
@@ -78,19 +106,19 @@ function displayweatherinfo(data){
 function getweatherEmoji(weatherId){
     switch(true){
         case weatherId >= 200 && weatherId < 300:
-            return "⛈️";
-        case weatherId >= 300 && weatherId < 500:
-            return "🌧️";
-        case weatherId >= 500 && weatherId < 600:
-            return "🌨️";
-        case weatherId >= 600 && weatherId < 700:
             return "❄️";
+        case weatherId >= 300 && weatherId < 500:
+            return "⛈️";
+        case weatherId >= 500 && weatherId < 600:
+            return "🌧️";
+        case weatherId >= 600 && weatherId < 700:
+            return "🌧️";
         case weatherId >= 700 && weatherId < 800:
-            return "🌫️";
+            return "☁️";
         case weatherId === 800:
             return "☀️";
         case weatherId >= 801 && weatherId < 810:
-                return "☁️";    
+                return "☀️";    
         default:
             return "??";
     }
